@@ -48,7 +48,7 @@ const CartPage = () => {
 
     setCheckoutLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/orders`, {
+      const response = await fetch(`/api/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const CartPage = () => {
 
   const verifyPayment = async (verificationPayload) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/orders/verify`, {
+      const res = await fetch(`/api/orders/verify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

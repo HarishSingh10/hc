@@ -76,13 +76,13 @@ const Home = () => {
       }
       const queryString = params.toString() ? `?${params.toString()}` : '';
 
-      const restRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/restaurants${queryString}`);
+      const restRes = await fetch(`/api/restaurants${queryString}`);
       if (restRes.ok) {
         const restData = await restRes.json();
         setRestaurants(restData);
       }
 
-      const menuRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items${queryString}`);
+      const menuRes = await fetch(`/api/menu-items${queryString}`);
       if (menuRes.ok) {
         const menuData = await menuRes.json();
         setMenuItems(menuData);

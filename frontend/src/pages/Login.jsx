@@ -24,7 +24,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isRegister) {
-      fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/restaurants`)
+      fetch(`/api/restaurants`)
         .then(res => res.ok ? res.json() : [])
         .then(data => {
           setRestaurants(data);

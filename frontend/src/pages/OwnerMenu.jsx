@@ -46,7 +46,7 @@ const OwnerMenu = () => {
   const fetchOrders = async () => {
     setOrdersLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/orders/restaurant/${restaurant.id}`, {
+      const response = await fetch(`/api/orders/restaurant/${restaurant.id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -68,7 +68,7 @@ const OwnerMenu = () => {
   const handleUpdateOrderStatus = async (orderId, newStatus) => {
     setOrderStatusUpdating(orderId);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/orders/${orderId}/status`, {
+      const response = await fetch(`/api/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ const OwnerMenu = () => {
   const fetchMenuItems = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items/restaurant/${restaurant.id}`);
+      const response = await fetch(`/api/menu-items/restaurant/${restaurant.id}`);
       if (response.ok) {
         const data = await response.json();
         setMenuItems(data);
@@ -178,8 +178,8 @@ const OwnerMenu = () => {
 
     try {
       const url = editingItem 
-        ? `${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items/${editingItem.id}` 
-        : `${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items`;
+        ? `/api/menu-items/${editingItem.id}` 
+        : `/api/menu-items`;
 
       const response = await fetch(url, {
         method: editingItem ? 'PUT' : 'POST',
@@ -212,7 +212,7 @@ const OwnerMenu = () => {
     };
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items/${item.id}`, {
+      const response = await fetch(`/api/menu-items/${item.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -237,7 +237,7 @@ const OwnerMenu = () => {
     if (!window.confirm("Are you sure you want to remove this dish from your menu?")) return;
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items/${id}`, {
+      const response = await fetch(`/api/menu-items/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -266,7 +266,7 @@ const OwnerMenu = () => {
     if (!setupName.trim()) { showToast('Restaurant name is required!', 'error'); return; }
     setSetupLoading(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/auth/setup-restaurant`, {
+      const res = await fetch(`/api/auth/setup-restaurant`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({

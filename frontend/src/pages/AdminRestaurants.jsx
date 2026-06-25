@@ -23,7 +23,7 @@ const AdminRestaurants = () => {
   const fetchRestaurants = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/restaurants`);
+      const response = await fetch(`/api/restaurants`);
       if (response.ok) { setRestaurants(await response.json()); }
     } catch (e) { console.error("Error:", e); }
     finally { setLoading(false); }
@@ -51,7 +51,7 @@ const AdminRestaurants = () => {
     };
 
     try {
-      const url = editing ? `${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/restaurants/${editing.id}` : `${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/restaurants`;
+      const url = editing ? `/api/restaurants/${editing.id}` : `/api/restaurants`;
       const response = await fetch(url, {
         method: editing ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
@@ -68,7 +68,7 @@ const AdminRestaurants = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this restaurant and all its menus?")) return;
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/restaurants/${id}`, {
+      const response = await fetch(`/api/restaurants/${id}`, {
         method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) {

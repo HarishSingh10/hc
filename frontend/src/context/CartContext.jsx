@@ -8,7 +8,7 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const { token, user } = useAuth();
-  const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}`;
+  const API_URL = `/api`;
 
   useEffect(() => {
     if (token && user) {

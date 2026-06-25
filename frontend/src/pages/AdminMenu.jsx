@@ -34,7 +34,7 @@ const AdminMenu = () => {
 
   const fetchRestaurants = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/restaurants`);
+      const response = await fetch(`/api/restaurants`);
       if (response.ok) {
         const data = await response.json();
         setRestaurants(data);
@@ -46,7 +46,7 @@ const AdminMenu = () => {
   const fetchMenuItems = async (restaurantId) => {
     setLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items/restaurant/${restaurantId}`);
+      const response = await fetch(`/api/menu-items/restaurant/${restaurantId}`);
       if (response.ok) { setMenuItems(await response.json()); }
     } catch (e) { console.error("Error fetching menus:", e); }
     finally { setLoading(false); }
@@ -76,7 +76,7 @@ const AdminMenu = () => {
     };
 
     try {
-      const url = editingItem ? `${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items/${editingItem.id}` : `${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items`;
+      const url = editingItem ? `/api/menu-items/${editingItem.id}` : `/api/menu-items`;
       const response = await fetch(url, {
         method: editingItem ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
@@ -96,7 +96,7 @@ const AdminMenu = () => {
   const handleDeleteItem = async (itemId) => {
     if (!window.confirm("Are you sure you want to delete this menu item?")) return;
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items/${itemId}`, {
+      const response = await fetch(`/api/menu-items/${itemId}`, {
         method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) {

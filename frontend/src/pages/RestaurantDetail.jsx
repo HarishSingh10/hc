@@ -28,7 +28,7 @@ const RestaurantDetail = () => {
 
   const fetchReviews = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/restaurants/${id}/reviews`);
+      const res = await fetch(`/api/restaurants/${id}/reviews`);
       if (res.ok) {
         const data = await res.json();
         setReviews(data);
@@ -44,7 +44,7 @@ const RestaurantDetail = () => {
     setSubmittingReview(true);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/restaurants/${id}/reviews`, {
+      const res = await fetch(`/api/restaurants/${id}/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,13 +73,13 @@ const RestaurantDetail = () => {
   const fetchRestaurantData = async () => {
     setLoading(true);
     try {
-      const restRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/restaurants/${id}`);
+      const restRes = await fetch(`/api/restaurants/${id}`);
       if (restRes.ok) {
         const restData = await restRes.json();
         setRestaurant(restData);
       }
 
-      const menuRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/menu-items/restaurant/${id}`);
+      const menuRes = await fetch(`/api/menu-items/restaurant/${id}`);
       if (menuRes.ok) {
         const menuData = await menuRes.json();
         setAllMenuItems(menuData);

@@ -17,7 +17,7 @@ const AdminOrders = () => {
   const fetchAllOrders = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/orders`, {
+      const response = await fetch(`/api/orders`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) { setOrders(await response.json()); }
@@ -27,7 +27,7 @@ const AdminOrders = () => {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080/api'}/orders/${orderId}/status`, {
+      const response = await fetch(`/api/orders/${orderId}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ status: newStatus })

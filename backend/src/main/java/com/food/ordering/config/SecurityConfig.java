@@ -69,7 +69,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/menu-items/**").hasAnyRole("ADMIN", "SHOP_OWNER")
                 .requestMatchers(HttpMethod.PUT, "/api/menu-items/**").hasAnyRole("ADMIN", "SHOP_OWNER")
                 .requestMatchers(HttpMethod.DELETE, "/api/menu-items/**").hasAnyRole("ADMIN", "SHOP_OWNER")
-                .anyRequest().authenticated()
+                .requestMatchers("/api/**").authenticated()
+                .anyRequest().permitAll()
             );
 
         http.authenticationProvider(authenticationProvider());
