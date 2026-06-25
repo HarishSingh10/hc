@@ -12,7 +12,7 @@ WORKDIR /app/backend
 COPY backend/pom.xml .
 COPY backend/src ./src
 # Copy the built frontend static files into the backend's static resources directory
-COPY --from=frontend-build /app/frontend/dist /app/backend/src/main/resources/static
+COPY --from=frontend-build /app/frontend/dist/ /app/backend/src/main/resources/static/
 RUN mvn clean package -DskipTests
 
 # Stage 3: Run the application
